@@ -1,0 +1,167 @@
+<?php
+
+namespace DummyNamespace;
+
+use Illuminate\Http\Request;
+use DummyRootNamespaceHttp\Controllers\Controller;
+use Exception;
+use bushart\crudmagic\CrudHelpers;
+use App\Models\DummyModel;
+
+class DummyClass extends Controller
+{
+    protected $DummyServiceVar;
+    private $data, $params = [];
+    private $success = false;
+    private $message = '';
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $this->data['headers'] = $this->headers();
+
+        return view('admin.DummyViewPath.index', $this->data);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('admin.DummyViewPath.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $data = $request->all();
+        if (!empty($data)) {
+            unset($data['token']);
+            DummyModel::create($data);
+            $this->success = true;
+            $this->message = 'Data created successfully';
+        }
+
+        return response()->json(['success' => $this->success, 'message' => $this->message]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        return view('admin.DummyViewPath.show');
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $this->data['data'] = DummyModel::find($id);
+
+        return view('admin.DummyViewPath.edit', $this->data);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request)
+    {
+        $data = $request->all();
+        $obj = DummyModel::find($data['id']);
+        if (!empty($obj)) {
+            $obj->update($data);
+            $this->success = true;
+            $this->message = 'Data updated successfully';
+        }
+
+        return response()->json(['success' => $this->success, 'message' => $this->message]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $obj = DummyModel::find($id);
+        if (!empty($obj)) {
+            $obj->delete();
+            $this->success = true;
+            $this->message = 'Data deleted successfully';
+        }
+
+        return response()->json(['success' => $this->success, 'message' => $this->message]);
+    }
+
+    /**
+     * This is use to get data.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getData(Request $request)
+    {
+        $this->data = [];
+        $this->params = [
+            'perPage' => 10, // use to paginate data per page bey default it is 10.
+            'page' => $request->input('page'),
+            'search' => $request->input('search'),
+            'sortColumn' => $request->input('sortColumn'),
+            'sortType' => $request->input('sortType'),
+            'dropDownFilters' => $request->input('dropDownFilters'),
+        ];
+        $this->data = DummyModel::getData($this->params);
+
+        return response()->json($this->data);
+    }
+
+
+    /**
+     * this is use to function create table header name
+     *
+     * @return array
+     */
+    protected function headers()
+    {
+         /*========================================
+          Here we use the test header names.
+          You can use the header names as you want.
+
+          In the action header, we use false for the sorting because we do not sort on the actions.
+          so the headers or the columns you do not want to sort just add false in the third place.
+
+          For the header names if they are different from the DummyModel column name, For example:
+          The column name in the table is Name and you want to use "Header name 1" in the header so for sorting you should have to add the DummyModel column name.
+          Like: ['Header name 1', 'name'],
+        ==========================================*/
+        $array = [
+            ['Header name 1'], ['Header name 2'], ['Action', '', false]
+        ];
+
+        return CrudHelpers::generateHeaders($array);
+    }
+}

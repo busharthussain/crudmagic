@@ -1,0 +1,68 @@
+<?php
+
+namespace DummyNamespace;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Session;
+use bushart\crudmagic\CrudHelpers;
+use bushart\crudmagic\Grid;
+
+class DummyClass extends Model
+{
+    use HasFactory;
+
+    protected $guarded = ['id'];
+
+    /**
+     * This is use to function get product category data
+     *
+     * @param $params
+     * @return array
+     */
+    public static function getData($params)
+    {
+        /*========================================
+         This only works with the joins not with the relations
+       ==========================================*/
+        $sql = DB::table('DummyTableVar as DummyTableAlias')->select('DummyTableAlias.*');
+
+        if (!empty($params['sortColumn']) && !empty($params['sortType'])) {
+            $sql->orderBy($params['sortColumn'], $params['sortType']);
+        }
+
+        if (!empty($params['search'])) {
+            $search = '%' . $params['search'] . '%';
+            $sql->where('DummyTableAlias.name', 'like', $search);
+        }
+
+        $sql->orderBy('DummyTableAlias.created_at', 'desc');
+        $grid = [];
+        $grid['query'] = $sql;
+        $grid['perPage'] = $params['perPage'];
+        $grid['page'] = $params['page'];
+        $grid['gridFields'] = self::gridFields();
+        return Grid::runSql($grid);
+    }
+
+    /**
+     * this is use to function make grid file
+     *
+     * @return array
+     */
+    protected static function gridFields()
+    {
+        /*========================================
+          We use the test column names here
+          Use the column names that you have in your DummyTableVar otherwise you won't be able to see your saved data on the page
+        ==========================================*/
+        $fields = [
+            ['YourColumnName1'], ['YourColumnName2']
+        ];
+        $arrFields = CrudHelpers::generateGridHeaders($fields);
+
+        return $arrFields;
+    }
+
+}

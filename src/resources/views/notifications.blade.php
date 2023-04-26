@@ -1,0 +1,1 @@
+@include('crudmagic::'.config('crud.css_framework').'-notifications')

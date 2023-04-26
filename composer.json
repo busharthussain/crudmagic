@@ -1,0 +1,33 @@
+{
+    "name": "bushart/crudmagic",
+    "description": "A simple modified crud package",
+    "type": "library",
+    "license": "MIT",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://github.com/busharthussain/crudmagic"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "bushart\\crudmagic\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "busharthussain",
+            "email": "busharthussain@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "bushart\\crudmagic\\MagicServiceProvider"
+            ]
+        }
+    }
+}

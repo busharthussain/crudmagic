@@ -1,0 +1,19 @@
+<?php
+
+namespace DummyNamespace;
+
+use DummyModelNamespace;
+use App\Contracts\DummyContract;
+use bushart\crudmagic\Curd;
+
+class DummyClass implements DummyContract 
+{
+    
+
+    
+    public function __construct(DummyModel $DummyServiceVar) 
+    {
+        $this->model = $DummyServiceVar;
+    }
+    
+}

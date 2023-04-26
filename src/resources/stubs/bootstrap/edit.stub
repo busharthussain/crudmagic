@@ -1,0 +1,54 @@
+@extends('layouts.app')
+
+@section('content')
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                         <h5 class="card-title">Edit DummyHeading</h5>
+                    </div>
+                    <form id="submit-form" enctype="multipart/form-data">
+                        {{ csrf_field() }}
+                        <div class="card-body">
+                            {{--Please do not remove this line while update the resource. We use this input to update the data based on the table id--}}
+                            <input type="hidden" value="{{@$data->id}}" name="id">
+                            {{--I have created this input field as test. You can modify it as your requirements--}}
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text" name="name" placeholder="name...." class="form-control" id="name" value="{{ $data->name }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-sm-6 text-right">
+                                    <button type="submit" class="btn btn-success">save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ asset('js/magic.js') }}"></script>
+    {{--I have used the sweet alert to show error or success messages. If you have already included sweetalert in your project so remove this line--}}
+    <script src="{{ asset('js/sweet_alert/sweet_alert.min.js') }}"></script>
+    <script>
+        /*========================================
+             I used formValid to validate the form.
+             By default I make it false.
+             If you want to validate your form so make it true.
+             And use jquery validation to validate your form.
+         ==========================================*/
+        const formValid = false;
+        const storeRoute = "{{ route('DummyViewPath.update') }}";
+        const indexRoute = "{{ route('DummyViewPath.index') }}";
+        $(document).ready(function () {
+
+        });
+
+    </script>
+@stop

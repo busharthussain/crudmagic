@@ -1,0 +1,3 @@
+Route::resource('namespace', 'App\Http\Controllers\ControllerClass');
+Route::post('update/namespace/data', [App\Http\Controllers\ControllerClass::class, 'update'])->name('namespace.update');
+Route::post('get/namespace/data', [App\Http\Controllers\ControllerClass::class, 'getData'])->name('namespace.data');

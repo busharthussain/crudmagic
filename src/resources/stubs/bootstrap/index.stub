@@ -1,0 +1,70 @@
+@extends('layouts.app')
+
+@section('content')
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row d-flex align-items-center">
+                            <div class="col-sm-6">
+                                <h5 class="card-title"><!-- insert title here --></h5>
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <a href="{{ route('DummyViewPath.create') }}" class="btn btn-primary btn-sm" style="float: right !important">
+                                    Create
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="card-body table-responsive">
+                          <div class="col-sm-12 mb-3">
+                              <input class="form-control" type="search" id="search" placeholder="Search Name">
+                          </div>
+                          <table class="table table-striped">
+                              @include('crudmagic::create_header', ['headers' => $headers])
+                              <tbody id="page-data"></tbody>
+                          </table>
+                          <div class="paq-pager"></div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ asset('js/magic.js') }}"></script>
+    {{--I have used the sweet alert to show error or success messages. If you have already included sweetalert in your project so remove this line--}}
+    <script src="{{ asset('js/sweet_alert/sweet_alert.min.js') }}"></script>
+    <script>
+        const renderRoute = '{{ route('DummyViewPath.data')}}';
+        let editRoute = '{{ route('DummyViewPath.edit', ['DummySingularServiceVar' => 0])}}';
+        editRoute = editRoute.substr(0, editRoute.lastIndexOf("/"));
+        editRoute = editRoute.substr(0, editRoute.lastIndexOf("/"));
+        let showDataRoute = '{{ url('DummyViewPath')}}';
+        const deleteRoute = '{{url('DummyViewPath')}}';
+        let token = "{{ csrf_token() }}";
+        let defaultType = 'renderAction';
+        let page = 1;
+        let id = '';
+        let search = '';
+        const asc = 'up';
+        const desc = 'down';
+        let sortType = 'desc';
+        let sortColumn = 'id';
+        let dropDownFilters = {};
+        $(document).ready(function () {
+            functionType = defaultType;
+            updateFormData();
+            renderMagic();
+        });
+
+        function updateFormData() {
+            formData = {
+                '_token': token,
+                page: page,
+                search: search,
+                sortType: sortType,
+                sortColumn: sortColumn
+            };
+        }
+    </script>
+@stop
