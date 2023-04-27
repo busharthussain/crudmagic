@@ -14,17 +14,15 @@
                             {{--Please do not remove this line while update the resource. We use this input to update the data based on the table id--}}
                             <input type="hidden" value="{{@$data->id}}" name="id">
                             {{--I have created this input field as test. You can modify it as your requirements--}}
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label>Name</label>
-                                    <input type="text" name="name" placeholder="name...." class="form-control" id="name" value="{{ $data->name }}">
-                                </div>
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" name="name" placeholder="name...." class="form-control" id="name" value="{{ $data->name }}">
                             </div>
                         </div>
                         <div class="card-footer">
                             <div class="row">
-                                <div class="col-sm-6 text-right">
-                                    <button type="submit" class="btn btn-success">save</button>
+                                <div class="col-sm-12 text-right">
+                                    <button class="btn btn-success">save</button>
                                 </div>
                             </div>
                         </div>

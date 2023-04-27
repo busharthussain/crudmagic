@@ -46,14 +46,6 @@ php artisan vendor:publish --tag=public
 php artisan vendor:publish --tag=config
 ```
 
-### Namespace for services
-
-Here you can set your default namespace for your service or repository classes.
-
-```
-'default_namespace' => 'Services'
-```
-
 ### Namespace for resource controllers
 
 If you wish to set a default namespace for resource controllers use this option.
@@ -61,36 +53,6 @@ Which will be used when in silent mode in the resource generator.
 
 ```
 'default_resource' => 'Admin',
-```
-
-### Select CSS Framework
-
-Since Laravel 8 switched to Tailwind CSS there are two options of views that can
-be generated. Just set the config to bootstrap or tailwind, depending on what you
-need.
-
-```
-'css_framework' => 'bootstrap',
-```
-
-### Implementations
-
-Update the configuration according to your needs. A sample configuration is
-provided in the config file.
-
-```
-return [
-    'implementations' => [
-        [
-            //This is where you set the requesting class
-            'when' => \App\Http\Controllers\Admin\UserController::class,
-            //This is where you can define your own contracts
-            'needs' => \Your\Own\Contract::class,
-            //This is where you send out the implementation
-            'give' => \App\Services\UserService::class
-        ]
-    ]
-];
 ```
 
 ## Generators

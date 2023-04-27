@@ -17,16 +17,9 @@
                                 <input type="text" name="name" placeholder="name...." class="form-control" id="name">
                             </div>
                         </div>
-                        <div class="card-footer">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <a href="{{ route('DummyViewPath.index') }}" class="btn btn-danger">cancel</a>
-                                </div>
-
-                                <div class="col-sm-6 text-right">
-                                    <button type="submit" class="btn btn-success">save</button>
-                                </div>
-                            </div>
+                        <div class="card-footer text-right">
+                             <a href="{{ route('DummyViewPath.index') }}" class="btn btn-danger">cancel</a>
+                             <button type="submit" class="btn btn-success">save</button>
                         </div>
                     </form>
                 </div>
