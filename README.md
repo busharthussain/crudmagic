@@ -18,7 +18,7 @@ can bind to your services via automated contextual binding.
 ## Installation
 Here is the complete video of the usage and installation of the package.
 
-<a href="https://www.youtube.com/watch?v=TMF2bbvme74" target="_blank">
+<a href="https://www.youtube.com/watch?v=TMF2bbvme74" onclick="window.open(this.href,'_blank');return false;">
   <img src="video/thumbnail.png" alt="Laravel magic">
 </a>
 
