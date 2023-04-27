@@ -16,7 +16,9 @@ can bind to your services via automated contextual binding.
 
 
 ## Installation
+Here is the complete video of the usage and installation of the package.
 
+![Laravel magic](video/magic.mp4)
 ### Install package
 
 Add the package in your composer.json by executing the command.
