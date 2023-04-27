@@ -268,6 +268,12 @@ including the model, service, resource controller Route and views .
 ```
 php artisan magic:resource YourResourceName
 ```
+### Note
 
+Please make sure that you use the jquery version ^3.0.
+If you do not include jquery in your main blade so please put this in your main blade with Javascript libraries.
+```
+<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+```
 
 Have fun CRUDding! :-)
