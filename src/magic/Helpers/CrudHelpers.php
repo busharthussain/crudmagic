@@ -1,5 +1,5 @@
 <?php
-namespace bushart\crudmagic\Helpers;
+namespace bushart\crudmagic\magic\Helpers;
 
 class CrudHelpers
 {
