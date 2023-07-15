@@ -1,5 +1,5 @@
 <?php
-namespace bushart\crudmagic;
+namespace bushart\crudmagic\Helpers;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
