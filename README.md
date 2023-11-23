@@ -121,6 +121,10 @@ class YourControllerName extends Controller
         $data = $request->all();
         if (!empty($data)) {
             unset($data['token']);
+            if ($request->hasFile('Your file input name')) {  // If you want to upload image
+                $path = 'Your public path';
+                $returnArray = CrudHelpers::uploadImage($request, 'your file input name', $path); // This function return a file name and file original name, you can use it as needed.
+            }
             YourModelName::create($data);
             $this->success = true;
             $this->message = 'Data created successfully';
@@ -163,7 +167,7 @@ class YourControllerName extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $obj = YourModelName::find($data['id']);
+        $obj = YourModelName::find($id);
         if (!empty($obj)) {
             $obj->update($data);
             $this->success = true;

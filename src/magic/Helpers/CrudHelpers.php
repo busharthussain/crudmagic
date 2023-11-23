@@ -266,17 +266,15 @@ class CrudHelpers
                     unlink($previousImagePath);
                 }
             }
-            $fileName = $request->$input->hashName();
+            $imageDetail[$input] = $request->$input->hashName();
+            $imageDetail[$input . '_original_name'] = $request->$input->getClientOriginalName();
             $image = $request->file($input);
             $destinationPath = public_path($path);
             if (!file_exists($destinationPath)) {
                 mkdir($destinationPath, 0777, true);
             }
-            $image->move($destinationPath, $fileName);
-            $imageDetail[$input] = $fileName = $request->$input->hashName();
-            $imageDetail[$input . '_original_name'] = $request->$input->getClientOriginalName();
+            $image->move($destinationPath,  $imageDetail[$input]);
         }
-
 
         return $imageDetail;
     }
