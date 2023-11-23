@@ -61,7 +61,7 @@ class RouteCommand extends GeneratorCommand
     {
         $stub = $this->files->get(__DIR__ . '/../../resources/stubs/route.stub');
         $class = str_replace($this->getNameInput() . '\\', '', $this->getNameInput());
-        $className =  Str::plural(Str::kebab(str_replace('namespace', '', $class)));
+        $className = (Str::kebab(str_replace('namespace', '', $class)));
         $stub = str_replace('namespace', $className, $stub);
         $route = str_replace('ControllerClass', $this->getNameInput().'Controller', $stub);
 

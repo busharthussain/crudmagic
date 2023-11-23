@@ -87,7 +87,12 @@ class ViewCommand extends GeneratorCommand
 
     protected function replaceViewPath($name)
     {
-        return Str::plural(Str::kebab(str_replace($this->getNamespace($name) . '\\', '', $name)));
+        return (Str::kebab(str_replace($this->getNamespace($name) . '\\', '', $name)));
+    }
+
+    protected function replaceViewUpdatePath($name)
+    {
+        return str_replace('-', '_', (Str::kebab(str_replace($this->getNamespace($name) . '\\', '', $name))));
     }
 
     /**
@@ -104,6 +109,7 @@ class ViewCommand extends GeneratorCommand
         $replace = [
             'DummyServiceVar' => $this->replaceServiceVar($name),
             'DummyViewPath' => $this->replaceViewPath($name),
+            'DummyViewUpdatePath' => $this->replaceViewUpdatePath($name),
             'DummyHeading' => ucfirst($name),
             'DummySingularServiceVar' => $this->replaceSingularServiceVar($name)
         ];

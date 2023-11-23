@@ -48,7 +48,9 @@ $(document).ready(function () {
                             swal.fire('Success', response.message, 'success');
                             $('#submit-form')[0].reset();
                             if (typeof (indexRoute) !== 'undefined' && !empty(indexRoute)) {
-                                window.location.href = indexRoute;
+                                setTimeout(function () {
+                                    window.location.href = indexRoute;
+                                },1500);
                             }
                         }
                     },

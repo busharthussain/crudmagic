@@ -40,7 +40,7 @@
          ==========================================*/
         const formValid = false;
          const isUpdate = true;
-        const storeRoute = "{{ route('DummyViewPath.update', ['DummyViewPath' => $data->id]) }}";
+        const storeRoute = "{{ route('DummyViewPath.update', ['DummyViewUpdatePath' => $data->id]) }}";
         const indexRoute = "{{ route('DummyViewPath.index') }}";
         $(document).ready(function () {
 

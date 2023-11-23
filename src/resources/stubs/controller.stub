@@ -5,7 +5,7 @@ namespace DummyNamespace;
 use Illuminate\Http\Request;
 use DummyRootNamespaceHttp\Controllers\Controller;
 use Exception;
-use bushart\crudmagic\CrudHelpers;
+use bushart\crudmagic\magic\Helpers\CrudHelpers;
 use App\Models\DummyModel;
 
 class DummyClass extends Controller
@@ -48,10 +48,10 @@ class DummyClass extends Controller
         $data = $request->all();
         if (!empty($data)) {
             unset($data['token']);
-            if($request->hasFile('your file input name')){  // If you want to upload image
-            // $path = public folder path
-            $returnArray = uploadImage($request,'your file input name',$path); // This function return a file name and file original name, you can use it as needed.
-            }
+           if ($request->hasFile('Your file input name')) {  // If you want to upload image
+               $path = 'Your public path';
+               $returnArray = CrudHelpers::uploadImage($request, 'your file input name', $path); // This function return a file name and file original name, you can use it as needed.
+           }
             DummyModel::create($data);
             $this->success = true;
             $this->message = 'Data created successfully';
