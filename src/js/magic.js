@@ -34,6 +34,9 @@ $(document).ready(function () {
                 return false;
             } else {
                 const formData = new FormData(this);
+                if (typeof isUpdate !== 'undefined' && !empty(isUpdate)) {
+                    formData.append('_method', 'PUT');
+                }
                 $.ajax({
                     url: storeRoute,
                     method: "POST",

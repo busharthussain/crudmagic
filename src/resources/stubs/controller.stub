@@ -48,6 +48,10 @@ class DummyClass extends Controller
         $data = $request->all();
         if (!empty($data)) {
             unset($data['token']);
+            if($request->hasFile('your file input name')){  // If you want to upload image
+            // $path = public folder path
+            $returnArray = uploadImage($request,'your file input name',$path); // This function return a file name and file original name, you can use it as needed.
+            }
             DummyModel::create($data);
             $this->success = true;
             $this->message = 'Data created successfully';
@@ -84,12 +88,13 @@ class DummyClass extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $data = $request->all();
-        $obj = DummyModel::find($data['id']);
+        $obj = DummyModel::find($id);
         if (!empty($obj)) {
             $obj->update($data);
             $this->success = true;

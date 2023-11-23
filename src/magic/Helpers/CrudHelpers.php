@@ -247,6 +247,40 @@ class CrudHelpers
         return $arr;
     }
 
+    /**
+     * Upload image
+     *
+     * @param $request
+     * @param $input
+     * @param $path
+     * @param string $previousImage
+     * @return array
+     */
+    static function uploadImage($request, $input, $path, $previousImage = '')
+    {
+        $imageDetail = [];
+        if ($request->hasFile($input)) {
+            if (isset($previousImage) && !empty($previousImage)) {
+                $previousImagePath = public_path($path) . $previousImage;
+                if (file_exists($previousImagePath)) {
+                    unlink($previousImagePath);
+                }
+            }
+            $fileName = $request->$input->hashName();
+            $image = $request->file($input);
+            $destinationPath = public_path($path);
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0777, true);
+            }
+            $image->move($destinationPath, $fileName);
+            $imageDetail[$input] = $fileName = $request->$input->hashName();
+            $imageDetail[$input . '_original_name'] = $request->$input->getClientOriginalName();
+        }
+
+
+        return $imageDetail;
+    }
+
     static function test()
     {
         dd('Package 234 successfully.');
